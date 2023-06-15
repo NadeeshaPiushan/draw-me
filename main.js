@@ -1,6 +1,10 @@
 const canvas = document.getElementById("canvas")
-canvas.height = window.innerHeight
-canvas.width = window.innerWidth
+
+const canvasOffsetLeft = canvas.offsetLeft;
+const canvasOffsetTop = canvas.offsetTop;
+
+canvas.height = 500
+canvas.width = 1000
 
 const ctx = canvas.getContext("2d")
 
@@ -41,13 +45,15 @@ window.addEventListener("mouseup", (e) => draw = false)
 
 window.addEventListener("mousemove", (e) => {
     if(prevX == null || prevY == null || !draw){
-        prevX = e.clientX
-        prevY = e.clientY
+        prevX = e.clientX - canvasOffsetLeft;
+        prevY = e.clientY - canvasOffsetTop;
         return
     }
 
-    let currentX = e.clientX
-    let currentY = e.clientY
+    
+
+    let currentX = e.clientX - canvasOffsetLeft;
+    let currentY = e.clientY - canvasOffsetTop;
 
     ctx.beginPath()
     ctx.moveTo(prevX, prevY)
